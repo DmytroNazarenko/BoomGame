@@ -10,29 +10,30 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:keepScreenOn="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity-->
-            <!--android:name=".GameActivity"-->
-            <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".BaseGameActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:keepScreenOn="true"/>
         <activity
             android:name=".ExtendedGameActivity"
             android:label="@string/title_activity_extended_game"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:keepScreenOn="true"/>
         <activity
             android:name=".ResultsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:keepScreenOn="true"/>
         <activity
             android:name=".PlayersActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:keepScreenOn="true"/>
     </application>
 
 </manifest>

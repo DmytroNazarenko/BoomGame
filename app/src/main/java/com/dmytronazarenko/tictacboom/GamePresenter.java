@@ -13,9 +13,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Дмитрий on 13.08.2016.
- */
 public class GamePresenter {
     private BaseGameActivity view;
 
@@ -66,7 +63,6 @@ public class GamePresenter {
         private Integer leftTime = 3;
         public PreliminateTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
-            //bombSound.setLooping(true);
         }
 
 
@@ -81,22 +77,6 @@ public class GamePresenter {
         }
     }
 
-    class MainTask extends AsyncTask <String, String, String>{
-
-
-        @Override
-        protected String doInBackground(String... strings) {
-            new PreliminateTimer(3000, 1000).start();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            new BombTimer(timerDuration, 100).start();
-        }
-    }
     public GamePresenter(BaseGameActivity activity) {
         this.view = activity;
         this.wordHandler = new WordHandler();
@@ -123,7 +103,7 @@ public class GamePresenter {
         sPref = view.getPreferences(Context.MODE_PRIVATE);
         if ( sPref.contains("key")){
             Set<String> set = sPref.getStringSet("key", null);
-            ArrayList<String> al = new ArrayList<String>();
+            ArrayList<String> al = new ArrayList<>();
             al.addAll(set);
             wordHandler.setWords(al);
             SharedPreferences.Editor editor = sPref.edit();
@@ -134,7 +114,7 @@ public class GamePresenter {
 
     public void wordsSave(){
         sPref = view.getPreferences(Context.MODE_PRIVATE);
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         set.addAll(wordHandler.getWords());
         SharedPreferences.Editor editor = sPref.edit();
         editor.putStringSet("key", set);
@@ -145,16 +125,17 @@ public class GamePresenter {
     public void newRound(){
         final String[] mas = {"В начале","В конце", "Любое место"};
 
-        timer = new BombTimer(timerDuration, 100);
+        new PreliminateTimer(3500, 1000).start();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                timer = new BombTimer(timerDuration, 100);
+                view.phrase_position.setText(mas[(int) (Math.random() * 3)].toUpperCase());
+                view.phrase.setText(wordHandler.selectNewWord().toUpperCase());
+                timer.start();
+            }
+        }, 3500);
 
-        Log.v("BBB", "" + wordHandler.getWords().size());
-        // new MainTask().execute();
-        view.phrase_position.setText(mas[(int) (Math.random() * 3)].toUpperCase());
-        view.phrase.setText(wordHandler.selectNewWord().toUpperCase());
-
-        synchronized (timer){
-            timer.start();
-        }
 
     }
 
