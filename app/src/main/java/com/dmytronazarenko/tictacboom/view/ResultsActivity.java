@@ -1,4 +1,4 @@
-package com.dmytronazarenko.tictacboom;
+package com.dmytronazarenko.tictacboom.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.dmytronazarenko.tictacboom.R;
+import com.dmytronazarenko.tictacboom.model.Players;
+import com.dmytronazarenko.tictacboom.presenter.PlayerAdapter;
 
 public class ResultsActivity extends AppCompatActivity {
 

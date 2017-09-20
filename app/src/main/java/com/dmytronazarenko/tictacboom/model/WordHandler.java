@@ -1,4 +1,4 @@
-package com.dmytronazarenko.tictacboom;
+package com.dmytronazarenko.tictacboom.model;
 
  import android.util.Log;
 
@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Дмитрий on 27.07.2016.
- */
+
 public class WordHandler {
 
     final String[] DICTIONARY = {
@@ -19,7 +17,7 @@ public class WordHandler {
             "со","те","ад","уз","во","хо","на","вар","рог","ти","га","уб",
             "лов","ле","да","ик","за","от","тор","не"
     };
-    ArrayList<String> words = new ArrayList<String>();
+    ArrayList<String> words = new ArrayList<>();
 
     public ArrayList<String> getWords() {
         return words;

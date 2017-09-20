@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:screenOrientation="portrait"
             android:keepScreenOn="true">
             <intent-filter>
@@ -18,15 +18,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BaseGameActivity"
+            android:name=".view.BaseGameActivity"
             android:screenOrientation="portrait"
             android:keepScreenOn="true"/>
         <activity
-            android:name=".ResultsActivity"
+            android:name=".view.ResultsActivity"
             android:screenOrientation="portrait"
             android:keepScreenOn="true"/>
         <activity
-            android:name=".PlayersActivity"
+            android:name=".view.PlayersActivity"
             android:screenOrientation="portrait"
             android:keepScreenOn="true"/>
     </application>

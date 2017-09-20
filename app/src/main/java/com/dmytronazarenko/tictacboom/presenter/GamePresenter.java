@@ -1,13 +1,16 @@
-package com.dmytronazarenko.tictacboom;
+package com.dmytronazarenko.tictacboom.presenter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
+
+import com.dmytronazarenko.tictacboom.view.BaseGameActivity;
+import com.dmytronazarenko.tictacboom.R;
+import com.dmytronazarenko.tictacboom.view.ResultsActivity;
+import com.dmytronazarenko.tictacboom.model.WordHandler;
 
 import java.util.ArrayList;
 import java.util.HashSet;

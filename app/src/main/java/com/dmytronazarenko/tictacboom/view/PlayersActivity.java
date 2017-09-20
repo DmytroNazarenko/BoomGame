@@ -1,19 +1,19 @@
-package com.dmytronazarenko.tictacboom;
+package com.dmytronazarenko.tictacboom.view;
 
-import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.dmytronazarenko.tictacboom.R;
+import com.dmytronazarenko.tictacboom.model.Players;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class PlayersActivity extends AppCompatActivity {
 
     // LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
-    ArrayList<String> listItems=new ArrayList<String>();
+    ArrayList<String> listItems=new ArrayList<>();
 
     // DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
     ArrayAdapter<String> adapter;
@@ -32,7 +32,7 @@ public class PlayersActivity extends AppCompatActivity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_players);
-        adapter=new ArrayAdapter<String>(this,
+        adapter=new ArrayAdapter<>(this,
                 R.layout.players_adapter,
                 listItems);
         ListView lv = (ListView) findViewById(R.id.listView2);
@@ -53,8 +53,7 @@ public class PlayersActivity extends AppCompatActivity {
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
-                String result = input.getText().toString();
-                result.trim();
+                String result = input.getText().toString().trim();
                 if (result != "") {
                     listItems.add(result);
                     players.addPlayer(result, 0);

@@ -1,4 +1,4 @@
-package com.dmytronazarenko.tictacboom;
+package com.dmytronazarenko.tictacboom.model;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,15 +15,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Дмитрий on 15.08.2016.
- */
+
 public class Players {
 
     private List<Player> players;
 
     public Players() {
-        this.players = new ArrayList<Player>();
+        this.players = new ArrayList<>();
     }
 
     public List<Player> getPlayersList(){
@@ -34,14 +32,6 @@ public class Players {
         players.add(new Player(name, points));
     }
 
-//    public void addPoint(int position){
-//        players.get(position).points++;
-//    }
-//
-//    public void setPoint(int position, int points){
-//        players.get(position).points = points;
-//    }
-
     // Loading results from players.txt
     public void loadResults(Context context){
 
@@ -51,7 +41,7 @@ public class Players {
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
+                String receiveString;
                 StringBuilder stringBuilder = new StringBuilder();
 
                 while ( (receiveString = bufferedReader.readLine()) != null ) {
@@ -81,7 +71,7 @@ public class Players {
         }
     }
 
-    class Player{
+    public class Player{
         private String name;
         private Integer points;
 

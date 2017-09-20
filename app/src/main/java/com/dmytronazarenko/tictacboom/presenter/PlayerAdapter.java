@@ -1,4 +1,4 @@
-package com.dmytronazarenko.tictacboom;
+package com.dmytronazarenko.tictacboom.presenter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,12 +6,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Map;
+import com.dmytronazarenko.tictacboom.R;
+import com.dmytronazarenko.tictacboom.model.Players;
 
-/**
- * Created by Дмитрий on 07.09.2017.
- */
+import java.util.ArrayList;
+
+
 public class PlayerAdapter extends BaseAdapter {
 
     private final ArrayList mData;
