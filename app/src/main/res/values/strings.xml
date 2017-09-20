@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">"Tic Tac Boom "</string>
+    <string name="title_activity_extended_game">ExtendedGameActivity</string>
+</resources>
