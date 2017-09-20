@@ -22,11 +22,6 @@
             android:screenOrientation="portrait"
             android:keepScreenOn="true"/>
         <activity
-            android:name=".ExtendedGameActivity"
-            android:label="@string/title_activity_extended_game"
-            android:theme="@style/AppTheme"
-            android:keepScreenOn="true"/>
-        <activity
             android:name=".ResultsActivity"
             android:screenOrientation="portrait"
             android:keepScreenOn="true"/>

@@ -17,12 +17,9 @@ public class GamePresenter {
     private BaseGameActivity view;
 
     private SharedPreferences sPref;
-    //Handler soundHandler;
     private WordHandler wordHandler;
-    //Runnable stopPlaybackRun;
     private BombTimer timer;
     private Integer timerDuration;
-    private boolean initialGame = true;
 
     class BombTimer extends CountDownTimer {
         MediaPlayer explosionSound = MediaPlayer.create(view.getApplicationContext(), R.raw.bomb);

@@ -31,28 +31,7 @@ public class ResultsActivity extends AppCompatActivity {
         playerAdapter = new PlayerAdapter(players);
         lv.setAdapter(playerAdapter);
 
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                if (SHOULD_SELECT_POINT) {
-//                    SHOULD_SELECT_POINT = false;
-//                    playerAdapter.getItem(position).addPoint();
-//                    playerAdapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//        });
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_OK) {
-//            SHOULD_SELECT_POINT = true;
-//        } else {
-//            SHOULD_SELECT_POINT = false;
-//        }
-//    }
 
     @Override
     protected void onResume() {
@@ -64,7 +43,7 @@ public class ResultsActivity extends AppCompatActivity {
                     SHOULD_SELECT_POINT = false;
                     playerAdapter.getItem(position).addPoint();
                     playerAdapter.notifyDataSetChanged();
-                } else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Вы уже выбрали проигравшего", Toast.LENGTH_SHORT).show();
                 }
             }
