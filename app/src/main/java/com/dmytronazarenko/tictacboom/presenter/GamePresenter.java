@@ -1,5 +1,7 @@
 package com.dmytronazarenko.tictacboom.presenter;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,7 +25,7 @@ public class GamePresenter {
     private WordHandler wordHandler;
     private BombTimer timer;
     private Integer timerDuration;
-
+    private ObjectAnimator animation;
     class BombTimer extends CountDownTimer {
         MediaPlayer explosionSound = MediaPlayer.create(view.getApplicationContext(), R.raw.bomb);
         MediaPlayer bombSound = MediaPlayer.create(view.getApplicationContext(), R.raw.ticktock3);
@@ -40,20 +42,16 @@ public class GamePresenter {
 
         @Override
         public void onFinish() {
+            animation.cancel();
             explosionSound.start();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    //if (initialGame){
-                        Intent intent = new Intent(view.getApplicationContext(), ResultsActivity.class);
-                        intent.putExtra("GAME_STATUS", 1);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        view.getApplicationContext().startActivity(intent);
-                        view.finish();
-//                    } else {
-//                        view.setResult(Activity.RESULT_OK);
-//                        view.finish();
-//                    }
+                    Intent intent = new Intent(view.getApplicationContext(), ResultsActivity.class);
+                    intent.putExtra("GAME_STATUS", 1);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    view.getApplicationContext().startActivity(intent);
+                    view.finish();
                 }
             }, 2000);
         }
@@ -65,10 +63,9 @@ public class GamePresenter {
             super(millisInFuture, countDownInterval);
         }
 
-
         @Override
         public void onTick(long millisUntilFinished) {
-            view.phrase.setText(leftTime.toString());
+            view.phrase_button.setText(leftTime.toString());
             leftTime--;
         }
 
@@ -81,22 +78,14 @@ public class GamePresenter {
         this.view = activity;
         this.wordHandler = new WordHandler();
         this.timerDuration = (int) (Math.random() * 60 + 5) * 1000;
-        //soundHandler = new Handler();
-//        stopPlaybackRun = new Runnable() {
-//
-//            public void run(){
-//                stopPlaying();
-//
-//                mp = MediaPlayer.create(view.getApplicationContext(), R.raw.bomb);
-//                mp.start();
-//
-//                Intent intent = new Intent(activity, ResultsActivity.class);
-//                intent.putExtra("GAME_STATUS", 1);
-//                activity.startActivity(intent);
-//                //view.btn.setEnabled(true);
-//            }
-//        };
 
+        this.animation = ObjectAnimator.ofPropertyValuesHolder(
+                view.phrase_button,
+                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.2f));
+        this.animation.setDuration(300);
+        this.animation.setRepeatCount(ObjectAnimator.INFINITE);
+        this.animation.setRepeatMode(ObjectAnimator.REVERSE);
     }
     
     public void wordsLoad(){
@@ -131,8 +120,9 @@ public class GamePresenter {
             public void run() {
                 timer = new BombTimer(timerDuration, 100);
                 view.phrase_position.setText(mas[(int) (Math.random() * 3)].toUpperCase());
-                view.phrase.setText(wordHandler.selectNewWord().toUpperCase());
+                view.phrase_button.setText(wordHandler.selectNewWord().toUpperCase());
                 timer.start();
+                animation.start();
             }
         }, 3500);
 
@@ -142,6 +132,9 @@ public class GamePresenter {
     public void stopPlaying() {
         if (timer != null) {
             timer.cancel();
+        }
+        if (animation != null){
+            animation.cancel();
         }
     }
 

@@ -12,23 +12,22 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Слово"
-        android:id="@+id/wordTextView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="159dp"
-        android:textSize="80dp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#536dfe" />
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:layout_weight="0.18">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_weight="0.75">
+
+        <Button
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:id="@+id/button"
+            android:background="@drawable/roundshapebtn"
+            android:clickable="true"
+            android:text="AAA"
+            android:textSize="80dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
@@ -36,12 +35,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
         android:id="@+id/posTextView"
         android:layout_gravity="center_horizontal"
         android:textSize="30dp"
         android:textColor="#448aff"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold" />
 
 </LinearLayout>
