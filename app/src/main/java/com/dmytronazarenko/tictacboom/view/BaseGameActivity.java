@@ -1,6 +1,10 @@
 package com.dmytronazarenko.tictacboom.view;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +19,7 @@ public class BaseGameActivity extends Activity {
     public TextView phrase_position;
     GamePresenter gp;
 
-    public void onClick(View view) {
-        gp.newRound();
-    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -41,7 +43,4 @@ public class BaseGameActivity extends Activity {
         phrase_position = (TextView) findViewById(R.id.posTextView);
     }
 
-    public void preStart(){
-
-    }
 }
