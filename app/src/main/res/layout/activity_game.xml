@@ -10,7 +10,8 @@
     tools:context="com.dmytronazarenko.tictacboom.GameActivity"
     android:background="#ffffff"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/game_background">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +28,8 @@
             android:text="AAA"
             android:textSize="80dp"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            style="?android:attr/borderlessButtonStyle" />
 
     </RelativeLayout>
 

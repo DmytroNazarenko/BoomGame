@@ -1,13 +1,22 @@
 package com.dmytronazarenko.tictacboom.presenter;
 
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.animation.AnimationUtils;
 
 import com.dmytronazarenko.tictacboom.view.BaseGameActivity;
 import com.dmytronazarenko.tictacboom.R;
@@ -19,20 +28,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GamePresenter {
-    private BaseGameActivity view;
 
+    private BaseGameActivity view;
     private SharedPreferences sPref;
     private WordHandler wordHandler;
     private BombTimer timer;
     private Integer timerDuration;
     private ObjectAnimator animation;
+    private Runnable runnable;
+    private Handler handler;
+    private ValueAnimator colorAnimation;
+
+
     class BombTimer extends CountDownTimer {
         MediaPlayer explosionSound = MediaPlayer.create(view.getApplicationContext(), R.raw.bomb);
         MediaPlayer bombSound = MediaPlayer.create(view.getApplicationContext(), R.raw.ticktock3);
 
         public BombTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
-            //bombSound.setLooping(true);
         }
 
         @Override
@@ -44,6 +57,13 @@ public class GamePresenter {
         public void onFinish() {
             animation.cancel();
             explosionSound.start();
+
+            ColorDrawable[] color = {new ColorDrawable(Color.WHITE), new ColorDrawable(Color.parseColor("#FF7043"))};
+            TransitionDrawable trans = new TransitionDrawable(color);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                view.game_background.setBackground(trans);
+                trans.startTransition(300);
+            }
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -53,7 +73,7 @@ public class GamePresenter {
                     view.getApplicationContext().startActivity(intent);
                     view.finish();
                 }
-            }, 2000);
+            }, 3000);
         }
     }
 
@@ -71,6 +91,7 @@ public class GamePresenter {
 
         @Override
         public void onFinish() {
+
         }
     }
 
@@ -86,6 +107,17 @@ public class GamePresenter {
         this.animation.setDuration(300);
         this.animation.setRepeatCount(ObjectAnimator.INFINITE);
         this.animation.setRepeatMode(ObjectAnimator.REVERSE);
+
+//        colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), Color.parseColor("#ffffff"), Color.parseColor("#ff7043"));
+//        colorAnimation.setDuration(200); // milliseconds
+//        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animator) {
+//                view.phrase_position.getRootView().setBackgroundColor((int) animator.getAnimatedValue());
+//            }
+//
+//        });
     }
     
     public void wordsLoad(){
@@ -110,22 +142,27 @@ public class GamePresenter {
         editor.commit();
     }
 
+    public void newRound() {
 
-    public void newRound(){
-        final String[] mas = {"В начале","В конце", "Любое место"};
+        final String[] mas = {"В начале", "В конце", "Любое место"};
 
-        new PreliminateTimer(3500, 1000).start();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                timer = new BombTimer(timerDuration, 100);
+        new PreliminateTimer(3200, 1000).start();
+
+
+        handler = new Handler();
+        runnable = new Runnable() {
+                @Override
+                public void run() {
+                    timer = new BombTimer(timerDuration, 100);
                 view.phrase_position.setText(mas[(int) (Math.random() * 3)].toUpperCase());
+
+                view.phrase_position.startAnimation(AnimationUtils.loadAnimation(view.getApplicationContext(), R.anim.textview_animation));
                 view.phrase_button.setText(wordHandler.selectNewWord().toUpperCase());
                 timer.start();
                 animation.start();
             }
-        }, 3500);
-
+        };
+        handler.postDelayed(runnable,3200);
 
     }
 
@@ -136,6 +173,10 @@ public class GamePresenter {
         if (animation != null){
             animation.cancel();
         }
+        if (handler != null){
+            handler.removeCallbacks(runnable);
+        }
+        view.phrase_position.setText("");
     }
 
 

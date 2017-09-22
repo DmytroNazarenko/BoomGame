@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dmytronazarenko.tictacboom.R;
@@ -21,6 +22,7 @@ public class BaseGameActivity extends Activity {
     public TextView phrase;
     public TextView phrase_position;
     public Button phrase_button;
+    public LinearLayout game_background;
     GamePresenter gp;
 
 
@@ -43,22 +45,10 @@ public class BaseGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         phrase_button = (Button) findViewById(R.id.button);
-        //phrase_button.setHeight(phrase_button.getWidth());
-        //phrase = (TextView) findViewById(R.id.wordTextView);
         phrase_position = (TextView) findViewById(R.id.posTextView);
+        game_background = (LinearLayout) findViewById(R.id.game_background);
+        //game_background.setBackgroundColor(Color.YELLOW);
         gp = new GamePresenter(this);
-        //ImageView iv = (ImageView) findViewById(R.id.my_imageview);
-
-//        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(
-//                phrase_button,
-//                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
-//                PropertyValuesHolder.ofFloat("scaleY", 1.2f));
-//        scaleDown.setDuration(170);
-//
-//        scaleDown.setRepeatCount(ObjectAnimator.INFINITE);
-//        scaleDown.setRepeatMode(ObjectAnimator.REVERSE);
-//
-//        scaleDown.start();
     }
 
 }
