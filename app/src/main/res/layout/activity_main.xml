@@ -11,32 +11,83 @@
     android:orientation="vertical"
     android:background="#f5f5f5">
 
-    <ImageView
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="20dp">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="\?"
+            android:id="@+id/button5"
+            android:background="@drawable/roundshapebtn"
+            android:textSize="35dp"
+            android:textColor="#fff"
+            android:layout_alignTop="@+id/button6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textStyle="bold" />
+
+        <ImageButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="i"
+            android:id="@+id/button6"
+            android:background="@drawable/roundshapebtn"
+            android:textSize="37dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:src="@android:drawable/ic_lock_silent_mode_off"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/imageView"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="BOOM"
+        android:id="@+id/textView4"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="15dp" />
+        android:textColor="#424242"
+        android:textSize="80dp"
+        android:textStyle="bold"
+        android:layout_marginTop="80dp"
+        android:elegantTextHeight="false"
+        android:editable="false"
+        android:singleLine="false" />
+
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewFlipper"
+        android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="236dp"
-        android:layout_height="wrap_content"
-        android:text="Новая игра"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/roundshapebtn"
+        android:text="GO!"
         android:id="@+id/playButton"
         android:nestedScrollingEnabled="false"
         android:onClick="playOnClick"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp"
-        android:layout_marginBottom="80dp"
-        android:background="#ff7043"
+        android:layout_marginBottom="50dp"
         android:textColor="#f5f5f5"
-        android:layout_weight="0.05"
-        android:textSize="20dp"
+        android:textSize="60dp"
         android:textStyle="bold"
-        android:allowUndo="false" />
+        android:allowUndo="false"
+        android:height="150dp"
+        android:width="150dp"
+        android:layout_marginTop="30dp" />
 
 </LinearLayout>
