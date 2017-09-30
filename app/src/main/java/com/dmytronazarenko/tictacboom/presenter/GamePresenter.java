@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -57,7 +58,7 @@ public class GamePresenter {
         public void onFinish() {
             animation.cancel();
             explosionSound.start();
-
+            ((Vibrator) view.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(2000);
             ColorDrawable[] color = {new ColorDrawable(Color.WHITE), new ColorDrawable(Color.parseColor("#FF7043"))};
             TransitionDrawable trans = new TransitionDrawable(color);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -108,16 +109,6 @@ public class GamePresenter {
         this.animation.setRepeatCount(ObjectAnimator.INFINITE);
         this.animation.setRepeatMode(ObjectAnimator.REVERSE);
 
-//        colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), Color.parseColor("#ffffff"), Color.parseColor("#ff7043"));
-//        colorAnimation.setDuration(200); // milliseconds
-//        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator animator) {
-//                view.phrase_position.getRootView().setBackgroundColor((int) animator.getAnimatedValue());
-//            }
-//
-//        });
     }
     
     public void wordsLoad(){
