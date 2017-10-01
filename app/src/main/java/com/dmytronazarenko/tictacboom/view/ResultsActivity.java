@@ -1,9 +1,19 @@
 package com.dmytronazarenko.tictacboom.view;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,6 +30,7 @@ public class ResultsActivity extends AppCompatActivity {
     final boolean GAME_IS_NOT_OVER = false;
     private ListView lv;
     private PlayerAdapter playerAdapter;
+    private Integer maximumPenalty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +46,42 @@ public class ResultsActivity extends AppCompatActivity {
         playerAdapter = new PlayerAdapter(players);
         lv.setAdapter(playerAdapter);
 
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        getMaximumPenalty();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
                 if (SHOULD_SELECT_POINT) {
                     SHOULD_SELECT_POINT = false;
-                    playerAdapter.getItem(position).addPoint();
+                    Players.Player player = playerAdapter.getItem(position);
+                    player.addPoint();
+                    if (player.getPoints() == maximumPenalty) {
+                        final Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                                R.anim.slide_out);
+                        animation.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                playerAdapter.remove(position);
+                                players.deletePlayer(position);
+                                playerAdapter.notifyDataSetChanged();
+                            }
+                        });
+                        view.startAnimation(animation);
+                        Toast.makeText(getApplicationContext(), player.getName() + " выбывает из игры :(", Toast.LENGTH_LONG).show();
+                    }
                     playerAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(getApplicationContext(), "Вы уже выбрали проигравшего", Toast.LENGTH_SHORT).show();
@@ -53,6 +89,12 @@ public class ResultsActivity extends AppCompatActivity {
             }
 
         });
+
+    }
+
+    private void getMaximumPenalty() {
+        SharedPreferences mySharedPreferences = getSharedPreferences("boom", Context.MODE_PRIVATE);
+        maximumPenalty = mySharedPreferences.getInt("maxpenalty", 1);
     }
 
     public void nextRound(View view) {

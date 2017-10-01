@@ -32,6 +32,10 @@ public class Players {
         players.add(new Player(name, points));
     }
 
+    public void deletePlayer(int position){
+        players.remove(position);
+    }
+
     // Loading results from players.txt
     public void loadResults(Context context){
 

@@ -37,6 +37,10 @@ public class PlayerAdapter extends BaseAdapter {
         return 0;
     }
 
+    public void remove(int position){
+        mData.remove(position);
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final View result;
