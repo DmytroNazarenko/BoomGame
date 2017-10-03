@@ -51,4 +51,10 @@ public class BaseGameActivity extends Activity {
         gp = new GamePresenter(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        //nothing to do
+    }
+
+
 }
