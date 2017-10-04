@@ -112,7 +112,7 @@ public class ResultsActivity extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.winner_dialog, null);
         alert.setView(dialogView);
         TextView textView = (TextView) dialogView.findViewById(R.id.textView5);
-        textView.setText(player.getName()+" победил!");
+        textView.setText(player.getName() + " победил!");
         AlertDialog alertToShow = alert.create();
         alertToShow.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
@@ -142,5 +142,9 @@ public class ResultsActivity extends AppCompatActivity {
 
         startActivity(intent);
         this.finish();
+    }
+
+    public void controversialIssue(View view) {
+        SHOULD_SELECT_POINT = false;
     }
 }

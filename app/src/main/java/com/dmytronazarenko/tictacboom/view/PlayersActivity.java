@@ -54,7 +54,7 @@ public class PlayersActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 String result = input.getText().toString().trim();
-                if (result != "") {
+                if (!result.equals("")) {
                     listItems.add(result);
                     players.addPlayer(result, 0);
                     adapter.notifyDataSetChanged();

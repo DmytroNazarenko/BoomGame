@@ -18,9 +18,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
-        android:layout_above="@+id/button4"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp" />
+        android:layout_above="@+id/button9" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,5 +38,28 @@
         android:id="@+id/button4"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="nextRound" />
+        android:onClick="nextRound"
+        android:clickable="true"
+        android:background="@drawable/oval_button"
+        android:textColor="#424242"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Спорный момент"
+        android:id="@+id/button9"
+        android:layout_above="@+id/button4"
+        android:background="@drawable/oval_button"
+        android:textColor="#424242"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignRight="@+id/button4"
+        android:layout_alignEnd="@+id/button4"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignStart="@+id/button4"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:onClick="controversialIssue" />
 </RelativeLayout>
