@@ -19,16 +19,16 @@
         </activity>
         <activity
             android:name=".view.BaseGameActivity"
-            android:screenOrientation="portrait"
-            android:keepScreenOn="true"/>
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.HelpActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.ResultsActivity"
-            android:screenOrientation="portrait"
-            android:keepScreenOn="true"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.PlayersActivity"
-            android:screenOrientation="portrait"
-            android:keepScreenOn="true"/>
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -86,4 +86,9 @@ public class MainActivity extends AppCompatActivity {
             mSwitcher.setText(textToShow[currentIndex]);
         }
     }
+
+    public void helpOnClick(View view){
+        Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
+    }
 }
